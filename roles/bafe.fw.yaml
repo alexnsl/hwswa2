@@ -8,9 +8,9 @@ firewall:
   networks: [backnet]
   rules:
   - ports: 8440
-    connect_with: { roles: [linmn, winmn] }
+    connect_with: { roles: [linmn] }
   - ports: 80,443,8443
-    connect_with: { roles: [balinos, bawinos] }
+    connect_with: { roles: [balinos] }
 - name: outgoing_frontnet
   description: outgoing connections in frontnet
   group: yes
@@ -19,20 +19,18 @@ firewall:
   rules:
   - ports: 21,443,8443,60000-65534
     connect_with: { roles: [branding] }
-  - ports: 21,443,8443,1024-65534
-    connect_with: { roles: [winbr, wincpnlb] }
 - name: incoming_backnet
   description: incoming connections in backnet
   networks: [backnet]
   ports: 5224
   connect_with: 
-    roles: [linmn, winmn, balinos, bawinos]
+    roles: [linmn, balinos]
 - name: incoming_frontnet
   description: incoming connections in frontnet
   networks: [frontnet]
   ports: 443,8443
   connect_with:
-    roles: [branding, winbr, wincpnlb, linpps, winpps]
+    roles: [branding, linpps]
 - name: incoming_from_internet
   description: Allow access to the panel
   networks: [frontnet]

@@ -7,13 +7,13 @@ firewall:
   networks: [backnet]
   ports: 5224
   connect_with:
-    roles: [balinfe, bawinfe]
+    roles: [balinfe]
 - name: Incoming_to_BALINOS_backnet
   description: Allow access to Online Store
   networks: [backnet]
   ports: 80,443,8443
   connect_with:
-    roles: [branding, winbr, wincpnlb, balinfe, bawinfe]
+    roles: [branding, balinfe]
 - name: External_incoming
   description: Allow access to Online Store from public network
   networks: [frontnet]

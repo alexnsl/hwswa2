@@ -13,7 +13,7 @@ firewall:
 - name: from_mn
   networks: [backnet]
   ports: 4465
-  connect_with: {roles: [linmn,winmn]}
+  connect_with: {roles: [linmn]}
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.[567]'
   ram(GB): 8

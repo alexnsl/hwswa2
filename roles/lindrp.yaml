@@ -6,7 +6,7 @@ firewall:
   networks: [frontnet]
   ports: 22,9444
   connect_with:
-    roles: [linwdg, winwdg]
+    roles: [linwdg]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 4

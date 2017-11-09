@@ -12,17 +12,17 @@ firewall:
   - ports: 389,3268
     connect_with: {roles: [ad]}
   - ports: 5224,5643,5743,5843 
-    connect_with: {roles: [balinfe, bawinfe]}
+    connect_with: {roles: [balinfe]}
   - ports: 3306
     connect_with: {roles: [mysql]}
   - ports: 5432
     connect_with: {roles: [pgsql, linmndb]}
   - ports: 8008
-    connect_with: {roles: [linpps, winpps]}
+    connect_with: {roles: [linpps]}
   - ports: 389
     connect_with: {roles: [linmailldap]}
   - ports: 4433-4435
-    connect_with: {roles: [vzlin, vzlinbu, vzwin, vzwinbu]}
+    connect_with: {roles: [vzlin, vzlinbu]}
   - ports: 4432
     connect_with: {roles: [oaci_im]}
   - ports: 48480

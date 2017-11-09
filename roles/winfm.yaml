@@ -5,7 +5,7 @@ firewall:
   networks: [backnet]
   direction: outgoing
   ports: 21,1024-65535
-  connect_with: {roles: [winweb, winbr]}
+  connect_with: {roles: [winweb]}
 requirements:
   OS_SP: "^Microsoft Windows Server 2012 R2 (Standard|Datacenter)$"
   architecture: 64-bit

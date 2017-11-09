@@ -9,7 +9,7 @@ firewall:
 - name: http
   networks: [backnet]
   ports: 80
-  connect_with: {roles: [winbr, wincpnlb, linwdg, winwdg]}
+  connect_with: {roles: [linwdg]}
 - name: public_http
   networks: [frontnet]
   ports: 80
