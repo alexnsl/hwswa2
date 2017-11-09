@@ -8,7 +8,7 @@ firewall:
   networks: [backnet]
   direction: outgoing
   ports: 8440
-  connect_with: {roles: [linmn,winmn]}
+  connect_with: {roles: [linmn]}
 - name: to_cdiws
   type: internet
   ports: 443

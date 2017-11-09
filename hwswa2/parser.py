@@ -5,6 +5,7 @@
 """Aliases for argparse positional arguments."""
 
 import argparse
+import sys
 
 class AliasedSubParsersAction(argparse._SubParsersAction):
 
@@ -36,6 +37,12 @@ class AliasedSubParsersAction(argparse._SubParsersAction):
             self._choices_actions.append(pseudo_action)
 
         return parser
+
+class Parser(argparse.ArgumentParser):
+    def error(self, message):
+        sys.stderr.write('error: %s\n' % message)
+        self.print_help()
+        sys.exit(2)
 
 if __name__ == '__main__':
     # An example parser with subcommands.

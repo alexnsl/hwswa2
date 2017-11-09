@@ -3,14 +3,14 @@ internal: yes
 ostype: linux
 includes: [ lincommon-blockdevs, lincommon-partitions, lincommon-virtualization ]
 parameters:
-  hw_id:              cat /sys/devices/virtual/dmi/id/product_uuid 2>/dev/null || echo None
+  hw_id:              cat /sys/class/dmi/id/product_uuid
   hostname:           hostname -f 2>/dev/null || hostname
   time_utc:           LANG=C date --utc
   time:               LANG=C date
   umask:              umask
   uptime:             uptime
   iptables:           iptables-save | grep -q REJECT && echo reject found || echo no rejects
-  ntp_service_status: systemctl status ntpd 2>&1
+  ntp_service_status: service ntpd status 2>&1
   OS:                 which lsb_release >/dev/null 2>&1 
                       && lsb_release --short --id --release | xargs 
                       || cat /etc/system-release 2>/dev/null || cat /etc/redhat-release
@@ -89,7 +89,7 @@ requirements:
   networks: { type: networks, value-example: [backnet, frontnet] }
   OS:
     type: regex
-    value-example: '(CentOS|Red Hat Enterprise Linux Server).* 7\.'
+    value-example: '(CentOS|Red Hat Enterprise Linux Server).* 6\.'
     join-rule: and
   architecture: x86_64
   is_admin: true

@@ -9,7 +9,7 @@ firewall:
     connect_with:
       roles: [linmn]
 requirements:
-  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.5'
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 8
   swap(GB): 16
   cpu-cores: 4

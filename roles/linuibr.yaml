@@ -1,0 +1,12 @@
+description: Checks for LINUIBR role, linux standalone branding server
+includes: [ lincommon, lin.oa.managed.fw, ngwebserver.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
+  ram(GB): 16
+  swap(GB): 32
+  cpu-cores: 4
+  cpu-frequency: 2.2
+  /: 4
+  /var: 40
+  networks: [backnet, frontnet]
+  branding_ui_fw: { type: manual, value: 'Be sure to use auxiliay roles branding and ui in servers.yaml while checking firewall' }

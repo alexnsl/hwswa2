@@ -7,11 +7,11 @@ firewall:
   rules:
   - name: to_apsc
     ports: 6308
-    connect_with: { roles: [linmn, winmn] }
+    connect_with: { roles: [linmn] }
   - name: to_privoxy
     ports: 8008
-    connect_with: { roles: [linpps, winpps] }
+    connect_with: { roles: [linpps] }
 - name: to_ui
   networks: [backnet]
   ports: 8080
-  connect_with: { roles: [branding, winbr, linwdg, winwdg, webmail_login] }
+  connect_with: { roles: [branding, linwdg, webmail_login] }

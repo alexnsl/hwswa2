@@ -1,0 +1,60 @@
+check_status: finished
+check_time: Tue Jul  5 11:43:56 2016
+expect: {10.0.2.15/frontnet: 'OK, IP address found on enp0s3', 10.10.10.10/heartbeat: 'NOT
+    OK, IP address NOT found'}
+name: localhost
+parameters:
+  CPUVTfeatures: ''
+  OS: Ubuntu 16.04
+  architecture: x86_64
+  blockdevs:
+  - {model: 'VBOX HARDDISK   ', name: sda, readonly: '0', removable: '0', rotational: '1',
+    size(GB): '68', type: disk, vendor: 'ATA     '}
+  - {model: 'CD-ROM          ', name: sr0, readonly: '0', removable: '1', rotational: '1',
+    size(GB): '1', type: rom, vendor: 'VBOX    '}
+  hostname: alex-VirtualBox
+  hw_id: 096521CB-5D4D-45CC-97F1-FA8954F6FC79
+  iptables: no rejects
+  is_admin: 'false'
+  network:
+    disable_ipv6: '0'
+    dns_check: OK
+    name_servers: 127.0.1.1
+    network_interfaces:
+    - gateway: 10.0.2.2
+      hwaddr: 08:00:27:f8:2b:de
+      ip:
+      - {address: 10.0.2.15, network: frontnet, prefix: '24'}
+      name: enp0s3
+      slaveof: ''
+      state: UP
+  ntp_service_status: "\u25CF ntpd.service\n   Loaded: not-found (Reason: No such\
+    \ file or directory)\n   Active: inactive (dead)"
+  partitions:
+  - {device: sda1, fs_type: ext4, mountpoint: /, size(GB): '65.999'}
+  - {device: sda2, fs_type: '-', mountpoint: '-', size(GB): '0'}
+  - {device: sda5, fs_type: swap, mountpoint: '-', size(GB): '1.998'}
+  password_strength: 0
+  processors: {count: '2', frequency(GHz): '2.69', model: Intel(R) Core(TM) i7-2620M
+      CPU @ 2.70GHz}
+  ram(GB): '1.953'
+  selinux: no selinux
+  swap(GB): '1.998'
+  time: "\u0412\u0442 \u0438\u044E\u043B  5 11:43:55 NOVT 2016"
+  time_utc: "\u0412\u0442 \u0438\u044E\u043B  5 05:43:55 UTC 2016"
+  tmp_noexec: OK
+  umask: '0022'
+  uptime: ' 11:43:54 up  2:24,  2 users,  load average: 0,75, 0,69, 0,54'
+  virtualization: kvm
+  yum_repos: no yum
+parameters_failures: {ntp_service_status: 'ExecutionException: Exit code: 3 |STDERR: '}
+requirement_failures: ['/var 150GB, / 5GB, /usr 20GB: /var(150)+/(5)+/usr(20) > actual:
+    /(65.999)', 'OS matches regex pattern (CentOS|Red Hat Enterprise Linux Server).*
+    6\.[567]: actual value: Ubuntu 16.04', 'swap(GB) >= 16: actual value: 1.998',
+  'processors:count >= 4: actual value: 2', 'ram(GB) >= 8: actual value: 1.953', 'password_strength
+    > 2: actual value: 0', 'network:disable_ipv6 == 1: actual value: 0', 'Required
+    networks: backnet: not found: backnet', 'Manual cert_oa: SSL certificate is needed
+    for control panel: ']
+requirement_successes: ['processors:frequency(GHz) >= 2.3', yum_repos != '', tmp_noexec
+    == OK, is_admin == True, architecture == x86_64, 'network:dns_check == OK']
+role: LINMN

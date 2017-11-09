@@ -10,7 +10,7 @@ firewall:
   ports: 5800-6800
   connect_with: {hosts: any}
 requirements:
-  OS: 'Parallels Cloud Server 6\.'
+  OS: 'Virtuozzo Linux release 7\.'
   virtualization: 'bare metal'
   ram(GB): 2
   swap(GB): 4

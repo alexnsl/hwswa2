@@ -1,11 +1,11 @@
 description: Checks for BALINOS role, linux BA online store
 includes: [ lincommon, lin.oa.managed.fw, baos.fw ]
 requirements:
-  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.[567]'
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 1
   swap(GB): 2
   cpu-frequency: 2.3
   /boot: 0.2
-  /: 100
+  /: 90
   networks: [backnet, frontnet]
   cert_baos: { type: manual, value: 'SSL certificate is needed for online store' }

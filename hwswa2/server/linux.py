@@ -130,7 +130,7 @@ class LinuxServer(Server):
             try:
                 self._sshtunnel = self.gateway.create_tunnel(self.name, self.address, self.port or 22, timeout=timeout)
             except TunnelException as te:
-                self._last_connection_error = "cannot connect via gateway %s: %s" % (self.gateway, te.value)
+                self._last_connection_error = "cannot connect via gateway %s: %s" % (self.gateway, te.msg)
                 logger.error(self._last_connection_error)
                 return False
             else:

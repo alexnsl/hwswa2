@@ -11,7 +11,8 @@ import getpass
 import hwswa2
 import hwswa2.subcommands as subcommands
 from hwswa2.server.factory import servers_context
-from hwswa2.aliases import AliasedSubParsersAction
+from hwswa2.parser import AliasedSubParsersAction
+from hwswa2.parser import Parser
 
 __version__ = '0.7.0'
 
@@ -105,7 +106,7 @@ def read_configuration():
     """Reads configuration from command line args and main.cfg"""
     global hwswa2
     ### Parsing commandline options
-    parser = argparse.ArgumentParser(
+    parser = Parser(
         prog='hwswa2', argument_default=argparse.SUPPRESS,
         description='HWSWA: tool for automatization of hardware/software check')
     parser.register('action', 'parsers', AliasedSubParsersAction)
@@ -146,7 +147,7 @@ def read_configuration():
 
     subparser = subparsers.add_parser('check', help='check servers',
                                       aliases=('ck',))
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames', nargs='+',
@@ -155,7 +156,7 @@ def read_configuration():
 
     subparser = subparsers.add_parser('show-reqs', help='show requirements for servers',
                                       aliases=('sr',))
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames', nargs='+',
@@ -164,7 +165,7 @@ def read_configuration():
 
     subparser = subparsers.add_parser('prepare', help='prepare servers (not implemented)',
                                       aliases=('pr',))
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames', nargs='+',
@@ -181,7 +182,7 @@ def read_configuration():
 
     subparser = subparsers.add_parser('reboot',
                                       help='reboot server(s) and measure reboot time')
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames', nargs='+',
@@ -208,7 +209,7 @@ def read_configuration():
         aliases=('be',))
     subparser.add_argument('-o', '--stdout', help='show stdout', action='store_true')
     subparser.add_argument('-e', '--stderr', help='show stderr', action='store_true')
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames',
@@ -234,7 +235,7 @@ def read_configuration():
     subparser = subparsers.add_parser('firewall',
                                       help='check connections between servers',
                                       aliases=('fw',))
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames', nargs='+',
@@ -244,11 +245,11 @@ def read_configuration():
     subparser = subparsers.add_parser('show-firewall',
                                       help='show firewall requirements for servers',
                                       aliases=('sfw',))
-    formatgroup = subparser.add_mutually_exclusive_group()
+    formatgroup = subparser.add_mutually_exclusive_group(required = True)
     formatgroup.add_argument('-c', '--compact', help='compact output',
                              action='store_true')
     formatgroup.add_argument('-v', '--csv', help='csv output', action='store_true')
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames', nargs='+',
@@ -263,7 +264,7 @@ def read_configuration():
             action='store_true')
     formatgroup.add_argument('-x', '--xlsx', help='save to <reportsdir>/reportYYYYMMDD-HHMM.xlsx file',
             action='store_true')
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames', nargs='+',
@@ -282,7 +283,7 @@ def read_configuration():
     subparser = subparsers.add_parser('reports',
                                       help='list reports for server(s)',
                                       aliases=('rs',))
-    servergroup = subparser.add_mutually_exclusive_group()
+    servergroup = subparser.add_mutually_exclusive_group(required = True)
     servergroup.add_argument('-a', '--all', dest='allservers',
                              help='all servers', action='store_true')
     servergroup.add_argument('-s', '--servers', dest='servernames', nargs='+',

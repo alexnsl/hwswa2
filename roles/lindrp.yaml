@@ -1,0 +1,17 @@
+description:  Domain Registrar Plug-ins Node
+includes: [ lincommon, lin.oa.managed.fw ]
+firewall:
+- name: incoming_from_wdg
+  description: Allow access to from watchdog
+  networks: [frontnet]
+  ports: 22,9444
+  connect_with:
+    roles: [linwdg]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
+  ram(GB): 4
+  swap(GB): 8
+  cpu-cores: 8
+  cpu-frequency: 2.3
+  /: 10
+  networks: [backnet, frontnet]

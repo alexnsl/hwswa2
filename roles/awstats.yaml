@@ -16,7 +16,7 @@ firewall:
   direction: outgoing
   networks: [frontnet]
   ports: 80
-  connect_with: {roles: [wsng, hewsl, winbr, wincpnlb]}
+  connect_with: {roles: [wsng, hewsl]}
 - name: tcp_in_frontnet
   description: TCP connections in frontnet to web servers
   type: internet

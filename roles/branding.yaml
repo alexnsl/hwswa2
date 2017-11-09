@@ -5,7 +5,7 @@ firewall:
   networks: [backnet]
   ports: 80,443,8443
   connect_with:
-    roles: [balinos,bawinos]
+    roles: [balinos]
 - name: from_branding
   group: yes
   direction: outgoing
@@ -25,7 +25,7 @@ firewall:
     connect_with: {roles: [wm, winsslpr]}
   - name: to_ba
     ports: 443,8443
-    connect_with: {roles: [balinfe, bawinfe]}
+    connect_with: {roles: [balinfe]}
   - name: to_awstats_mssqladm
     ports: 80
     connect_with: {roles: [awstats, mssqldataadm]}
@@ -35,7 +35,7 @@ firewall:
   rules:
   - name: from_ba
     ports: 21,443,8443,60000-65535
-    connect_with: {roles: [balinfe, bawinfe]}
+    connect_with: {roles: [balinfe]}
   - name: from_wdg
     ports: 21,80,443,60000-65535
-    connect_with: {roles: [linwdg, winwdg]}
+    connect_with: {roles: [linwdg]}

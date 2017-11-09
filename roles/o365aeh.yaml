@@ -7,13 +7,13 @@ firewall:
   rules:
   - networks: [frontnet]
     ports: 443
-    connect_with: {roles: [branding, winbr]}
+    connect_with: {roles: [branding]}
   - networks: [backnet]
     ports: 6308
-    connect_with: {roles: [linmn, winmn]}
+    connect_with: {roles: [linmn]}
   - networks: [backnet]
     ports: 5224
-    connect_with: {roles: [balinfe, bawinfe]}
+    connect_with: {roles: [balinfe]}
   - networks: [backnet]
     ports: 1433
     connect_with: {roles: [o365mssql]}

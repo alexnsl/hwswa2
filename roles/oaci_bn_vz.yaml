@@ -6,7 +6,7 @@ firewall:
   ports: 64000,22
   connect_with: {roles: [oaci_bn_vz, oaci_vz]}
 requirements:
-  OS: 'Parallels Cloud Server 6\.'
+  OS: 'Virtuozzo Linux release 7\.'
   ram(GB): 2
   swap(GB): 4
   cpu-frequency: 1.5

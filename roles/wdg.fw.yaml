@@ -7,7 +7,7 @@ firewall:
   group: yes
   rules:
   - { ports: 21,80,443,60000-65535, connect_with: { roles: [helb, hewsl, wsng] } }
-  - { ports: 21,80,443,1024-65534, connect_with: { roles: [cf, winweb, winbr] } }
+  - { ports: 21,80,443,1024-65534, connect_with: { roles: [cf, winweb] } }
   - { ports: 53, protos: [TCP, UDP], connect_with: { roles: [lindns] } }
   - { ports: 22,443,8443 connect_with: { roles: [balinfe] } }
   - { ports: 25,110,143, connect_with: { roles: [linmailsh, linmailnlb] } }
@@ -20,8 +20,7 @@ firewall:
   networks: [backnet]
   group: yes
   rules:
-  - { ports: 8080, connect_with: { roles: [winui] } }
-  - { ports: 1433, connect_with: { roles: [winmn, mssql, mssqlcluster] } }
+  - { ports: 1433, connect_with: { roles: [mssql, mssqlcluster] } }
   - { ports: 3306, connect_with: { roles: [mysql] } }
   - { ports: 5432, connect_with: { roles: [linmn, pgsql] } }
   - { ports: 22, connect_with: { roles: [lincommon] } }

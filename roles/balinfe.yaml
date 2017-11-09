@@ -11,9 +11,9 @@ firewall:
   networks: [frontnet]
   ports: 22,443,8443
   connect_with:
-    roles: [linwdg, winwdg]
+    roles: [linwdg]
 requirements:
-  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.[567]'
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   no_pba_account: { type: regex, value: '^OK' }
   ram(GB): 4
   swap(GB): 8

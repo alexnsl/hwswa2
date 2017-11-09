@@ -5,13 +5,13 @@ firewall:
   networks: [backnet]
   ports: 8008
   connect_with:
-    roles: [linmn, winmn, winui, vzlin, vzlinbu, vzwin, vzwinbu]
+    roles: [linmn, vzlin, vzlinbu]
 - name: Outgoing_to_BA
   direction: outgoing
   networks: [frontnet]
   ports: 443,8443
   connect_with:
-    roles: [balinfe, bawinfe]
+    roles: [balinfe]
 - name: apscatalog
   direction: outgoing
   networks: [frontnet]

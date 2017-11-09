@@ -1,7 +1,7 @@
 description: Checks for LINMN role, linux management node
 includes: [ lincommon, mn.fw ]
 requirements:
-  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.[567]'
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 8
   swap(GB): 16
   cpu-cores: 4

@@ -5,6 +5,7 @@ import sys
 import os
 import fcntl
 import termios
+import argparse
 
 __all__ = ['wait_for', 'wait_for_not', 'shell_escape', 'term_winsz',
            'range2list', 'range_len', 'list2range', 'splitlist', 'splitrange',
@@ -201,3 +202,7 @@ def encrypt(key, password):
 
 def decrypt(key, password):
     return AESCipher(key).decrypt(password)
+
+
+# Parser
+

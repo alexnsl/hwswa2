@@ -1,7 +1,8 @@
 accounts:
  - &root
-   login: root
-   password: secret
+   login: alex
+   password: 123qwe
+   sudo: 123qwe
    #or key: path/to/ssh/key
    # 'password' specifies either account password or ssh key passphrase (if needed)
    # if key is not protected with password, or you have configured passwordless access via ~/.ssh,
@@ -14,9 +15,9 @@ accounts:
    password: testpassword
    su: rootpassword
 servers:
- - { name: localhost, address: 127.0.0.1, role: PVCLIN, account: *root, expect: [{ip: 4.4.4.4, network: frontnet}, {ip: 10.10.10.10, network: heartbeat}] }
- - { name: localhost2, address: 127.0.0.1, port: 21, role: PVCLIN, account: *root }
- - { name: localhost3, address: 127.0.0.1, role: [PVCLIN, LINMN], account: *testaccountwithsu }
+ - { name: localhost, address: 127.0.0.1, role: LINMN, account: *root, expect: [{ip: 10.0.2.15, network: frontnet}, {ip: 10.10.10.10, network: heartbeat}] }
+# - { name: localhost2, address: 127.0.0.1, port: 21, role: PVCLIN, account: *root }
+# - { name: localhost3, address: 127.0.0.1, role: [PVCLIN, LINMN], account: *testaccountwithsu }
  # valid fields:
  # name: required
  # dontcheck: optional, means that server is not to be checked/rebooted/prepared

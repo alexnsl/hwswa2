@@ -10,11 +10,11 @@ firewall:
     connect_with:
       hosts: any
 requirements:
-  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.'
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 2
   swap(GB): 4
   cpu-cores: 2
   cpu-frequency: 2.3
-  /var: 28
+  /var: 26
   /: 4
   networks: [backnet, frontnet]

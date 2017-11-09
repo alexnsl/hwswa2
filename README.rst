@@ -19,23 +19,15 @@ Distribuition is created from git repo with the use of virtualenv and pyinstalle
 
    - from git::
 
-     $ git clone https://gorilych@bitbucket.org/gorilych/hwswa2.git
+     $ git clone https://github.com/alexnsl/hwswa2.git
      $ cd hwswa2
 
-   - or download master branch::
-       
-     $ wget -c https://bitbucket.org/gorilych/hwswa2/get/master.tar.gz
-     $ tar zxf master.tar.gz
-     $ cd gorilych-hwswa2-*/
-
-   - or download from git.gorilych.ru::
-
-     $ wget -cN https://git.gorilych.ru/hwswa2.git/snapshot/HEAD.tar.gz
-     $ tar zxf HEAD.tar.gz
-     $ cd hwswa2-HEAD-*
 
 2. Prepare virtualenv::
 
+   $ yum install python-setuptools
+   $ easy_install virtualenv
+   $ easy_install pip
    $ virtualenv --no-site-packages env
    $ source env/bin/activate
 
@@ -43,16 +35,7 @@ Distribuition is created from git repo with the use of virtualenv and pyinstalle
 
    (env)$ pip install -r requirements.txt
 
-4. Compile hwswa2 windows agent
-
-   https://bitbucket.org/gorilych/hwswa2_wagent
-
-   Both debug and non-debug versions are needed. Copy them into resources directory:
-
-   resources/wagent.exe
-   resources/wagent-debug.exe
-
-5. Create distribution with pyinstaller
+4. Create distribution with pyinstaller
 
    .. code-block:: shell
 
