@@ -1,11 +1,15 @@
 description: Checks for HELB role, linux NG load balancer
-includes: [ lincommon, lin.oa.managed.fw, webserver.pub.fw ]
+includes: [ lincommon ]
 firewall:
 - name: ganglia
   networks: [backnet]
   protos: [UDP]
   ports: 8649
   connect_with: { roles: [hewsl, henas] }
+- name: ssh
+  networks: [backnet]
+  ports: 22
+  connect_with: { roles: [linmn, linmnapp] }
 requirements:
   virtualization: 'bare metal'
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.'

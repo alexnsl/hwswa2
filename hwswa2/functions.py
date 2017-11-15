@@ -107,7 +107,7 @@ def read_configuration():
     global hwswa2
     ### Parsing commandline options
     parser = Parser(
-        prog='hwswa2', argument_default=argparse.SUPPRESS,
+        prog='hwswa2.py', argument_default=argparse.SUPPRESS,
         description='HWSWA: tool for automatization of hardware/software check')
     parser.register('action', 'parsers', AliasedSubParsersAction)
 

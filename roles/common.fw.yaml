@@ -1,0 +1,28 @@
+description: common firewall rules
+internal: yes
+firewall:
+- name: dns
+  description: connections to internal DNS resolvers
+  direction: outgoing
+  networks: [backnet, frontnet]
+  ports: 53
+  proto: [tcp,udp]
+  connect_with: {roles: [resolver]}
+- name: external
+  group: yes
+  description: >
+    connection to external services.
+
+    These rules will allways fail, it is here to be shown with show-firewall
+  networks: [backnet, frontnet]
+  direction: outgoing
+  type: internet
+  rules:
+  - connect_with: { hosts: [ dns.resolvers ] }
+    ports: 53
+    protos: [tcp, udp]
+  - connect_with: { hosts: [ ntp.servers ] }
+    ports: 123
+    protos: [udp]
+  - connect_with: { hosts: [ yum.repos, windows.update ] }
+    ports: 80,443

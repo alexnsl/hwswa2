@@ -23,34 +23,39 @@ Distribuition is created from git repo with the use of virtualenv and pyinstalle
      $ cd hwswa2
 
 
-2. Prepare virtualenv::
+2. Prepare virtualenv directory::
 
-   $ yum install python-setuptools
-   $ easy_install virtualenv
-   $ easy_install pip
-   $ virtualenv --no-site-packages env
-   $ source env/bin/activate
+   Note that directory name is hardcoded into hwswa.py and should be 'virtualenv'
+
+   .. code-block:: shell
+   
+      $ yum install python-setuptools
+      $ easy_install virtualenv
+      $ easy_install pip
+      $ virtualenv --quiet --no-site-packages --always-copy --unzip-setuptools --prompt='(hwswa2)' virtualenv
+      $ virtualenv --relocatable virtualenv
+      $ source virtualenv/bin/activate
 
 3. Install requirements::
 
-   (env)$ pip install -r requirements.txt
+   (hwswa2)$ pip install -r requirements.txt
+   (hwswa2)$ virtualenv --relocatable virtualenv
 
-4. Create distribution with pyinstaller
+4. Create distribution with embedded virtualenv
 
    .. code-block:: shell
 
-      (env)$ which rst2pdf >/dev/null && \
+      (hwswa2)$ which rst2pdf >/dev/null && \
              { for d in README.rst CHANGELOG.rst docs/*rst;
                  do rst2pdf $d; done; }
-      (env)$ rm -rf pyinstaller/hwswa2 && \
-             pyinstaller --distpath=pyinstaller/hwswa2/ \
-                         --workpath=pyinstaller/build/ \
-                         --clean pyinstaller/hwswa2.spec && \
-             \cp -af README* LICENSE CHANGELOG* config/ resources/ roles/ docs/ \
-                     pyinstaller/hwswa2/ && \
-             pushd pyinstaller/ && tar zcf hwswa2.tgz hwswa2 && popd
+      (hwswa2)$ PDFs=$(find . -type f -name '*.pdf')
+      (hwswa2)$ git archive --prefix hwswa2/ --format tar --output hwswa2.tar HEAD
+      (hwswa2)$ tar --append -f hwswa2.tar --transform 's,^\.,hwswa2,' ./virtualenv/ $PDFs
+      (hwswa2)$ gzip --to-stdout hwswa2.tar > hwswa2.tgz && rm hwswa2.tar
 
-Distribution archive will be stored in pyinstaller/hwswa2.tgz
+Distribution archive will be stored in hwswa2.tgz
+
+Alternatively, you can modify build.sh for your needs.
 
 Requirements: python >=2.7, virtualenv, gcc + glibc-headers,
 python-dev, libssl-dev, libkrb5-dev, libffi-dev, libyaml-dev ..
@@ -85,7 +90,7 @@ Installation
    # cp roles/mysql.yaml roles/newrole.yaml
    # vim roles/newrole.yaml
 
-   alias hwswa2="`pwd`/hwswa2/hwswa2 -c `pwd`/cfg/main.cfg -s
+   alias hwswa2="`pwd`/hwswa2/hwswa2.py -c `pwd`/cfg/main.cfg -s
                  `pwd`/cfg/servers.yaml -n `pwd`/cfg/networks.yaml
                  -r `pwd`/reports"
 
@@ -97,8 +102,8 @@ All possible options are shown by '-h' switch:
 
 .. code-block:: shell
 
-   $ ./hwswa2 -h
-   usage: hwswa2 [-h] [--version] [-c CONFIGFILE] [-s SERVERSFILE]
+   $ ./hwswa2.py -h
+   usage: hwswa2.py [-h] [--version] [-c CONFIGFILE] [-s SERVERSFILE]
                  [-n NETWORKSFILE] [-l LOGFILE] [-r REPORTSDIR] [-d]
 
                  {check,c,prepare,p,checkall,ca,prepareall,pa,shell,s,reboot,
@@ -205,7 +210,7 @@ Source files
    localhost
 
 hwswa2.py
-  script to run directly from source, without building binary distribution
+  Main application script
 
 roles/
   location of role check description files: `<role name (lowercase)>.yaml`

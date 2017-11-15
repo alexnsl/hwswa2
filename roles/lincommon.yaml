@@ -1,7 +1,7 @@
 description: Common checks for all linux roles
 internal: yes
 ostype: linux
-includes: [ lincommon-blockdevs, lincommon-partitions, lincommon-virtualization ]
+includes: [ lincommon-blockdevs, lincommon-partitions, lincommon-virtualization, lincommon.fw ]
 parameters:
   hw_id:              cat /sys/devices/virtual/dmi/id/product_uuid 2>/dev/null || echo None
   hostname:           hostname -f 2>/dev/null || hostname

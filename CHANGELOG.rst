@@ -2,6 +2,11 @@
 Version History
 ===============
 
+0.7.2 (2017-11?)
+    - Change: updated roles according requirements of OAP 7.2
+    - Change: removed pyinstaller-based distribution
+    - Added: support for CircleCI
+
 0.7.0 (2016-03-01)
     - Added: new options for report: --xlsx
     - Added: new options for bulk_exec: --stdout and --stderr

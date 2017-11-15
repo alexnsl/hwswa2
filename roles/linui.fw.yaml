@@ -1,0 +1,36 @@
+description: >
+  Firewall rules common for LINUIBR, LINUICLN
+  
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/86989.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/92105.htm
+internal: yes
+firewall:
+- name: gr_out_frontnet
+  description: Outgoing connections in frontnet
+  group: yes
+  networks: [frontnet]
+  direction: outgoing
+  rules:
+  - connect_with: { roles: [winsslpr] }
+    ports: 443
+  - connect_with: { roles: [mssqldataadm] }
+    ports: 80
+- name: gr_out_backnet
+  description: Outgoing connections in backnet
+  group: yes
+  networks: [backnet]
+  direction: outgoing
+  rules:
+  - connect_with: { roles: [linmn, linmnapp] }
+    ports: 6308
+  - connect_with: { roles: [linpps] }
+    ports: 8008
+  - connect_with: { roles: [balinos] }
+    ports: 80,443
+  - connect_with: { roles: [oacivz] }
+    ports: 80
+- name: in_frontnet
+  description: Incoming connections in frontnet
+  networks: [frontnet]
+  connect_with: { roles: [balinfe, linwdg] }
+  ports: 21,80,443,60000-65535

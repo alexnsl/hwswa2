@@ -1,12 +1,16 @@
-description:  Domain Registrar Plug-ins Node
+description: >
+  Domain Registrar Plug-ins Node
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/87721.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/91801.htm
 includes: [ lincommon, lin.oa.managed.fw ]
 firewall:
-- name: incoming_from_wdg
-  description: Allow access to from watchdog
-  networks: [frontnet]
-  ports: 22,9444
+- name: incoming_from_mn
+  description: Allow access to from MN
+  networks: [backnet]
+  ports: 9444
   connect_with:
-    roles: [linwdg]
+    roles: [linmn,linmnapp]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 4

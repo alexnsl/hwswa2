@@ -1,0 +1,32 @@
+description: >
+  Virtuozzo virtualization node. It is intended for use in the Cloud Infrastructure to host Linux containers and Linux/Windows virtual machines.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/69795.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/70121.htm
+includes: [ lincommon, lin.oa.managed.fw, vz.fw ]
+parameters:
+    vzlicense: vzlicview --check-status || true
+requirements:
+  OS: 'Virtuozzo Linux release 7\.'
+  vzlicense: ACTIVE
+  virtualization: 'bare metal'
+  CPUVTfeatures: { type: neq, value: '' }
+  ram(GB): 2
+  swap(GB): 4
+  cpu-frequency: 1.5
+  /: 12
+  /vz: 88
+  networks: [backnet, frontnet]
+  storage_roles: { type: manual, value: 'Be sure to use vzstorage roles if VZ storage cluster is used' }
+firewall:
+- name: incoming
+  group: yes
+  networks: [backnet]
+  rules:
+  - connect_with: {roles: [oaciim]}
+    ports: 161
+    protos: [udp]
+  - connect_with: {roles: [branding, linui, linbr]}
+    ports: 80
+  - connect_with: {roles: [oacivz]}
+    ports: 64000

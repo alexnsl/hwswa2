@@ -1,12 +1,12 @@
 description: Business Automation Database Server on Linux
 includes: [ lincommon, lin.oa.managed.fw ]
 firewall:
-  - name: Incoming_from_BA
-    description: Allow access to PostgreSQL from BA App
+  - name: psql
+    description: Allow access to PostgreSQL from BA and OA
     networks: [backnet]
     ports: 5432
     connect_with:
-      roles: [balinfe]
+      roles: [balinfe, linmn, linmnapp]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 8

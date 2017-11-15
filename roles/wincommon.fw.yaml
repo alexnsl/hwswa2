@@ -1,0 +1,10 @@
+description: common firewall rules for windows
+internal: yes
+includes: [ common.fw ]
+firewall:
+- name: rdp
+  description: RDP
+  networks: [backnet, frontnet]
+  ports: 3389
+  connect_with: {roles: [deployment_workstation]}
+

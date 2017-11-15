@@ -1,0 +1,34 @@
+description: >
+  Instance Manager node. It is intended for use in the Cloud Infrastructure for hosting the Instance Manager – the OACI control center.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/69793.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/70119.htm
+includes: [ lincommon, lin.oa.managed.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.[567]'
+  ram(GB): 8
+  swap(GB): 16
+  cpu-cores: 4
+  /: 4
+  /var: 130
+  networks: [backnet, frontnet]
+firewall:
+- name: Outgoing_rules
+  group: yes
+  direction: outgoing
+  networks: [backnet]
+  rules:
+  - ports: 22,5432
+    connect_with: {roles: [oaciimdb]}
+  - ports: 64000
+    connect_with: {roles: [oacivzbn]}
+  - ports: 61616
+    connect_with: {roles: [oacivz]}
+- name: incoming
+  group: yes
+  networks: [backnet]
+  rules:
+  - connect_with: {roles: [linmn, linmnapp]}
+    ports: 4465
+  - connect_with: {roles: [oacivz]}
+    ports: 61616

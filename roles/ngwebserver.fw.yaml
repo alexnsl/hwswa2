@@ -10,7 +10,7 @@ firewall:
   rules:
   - name: to_redis
     ports: 6380-6430
-    connect_with: {roles: [linmn]}
+    connect_with: {roles: [linmn, linmnapp]}
   - name: to_mysql
     ports: 3306
     connect_with: {roles: [mysql]}

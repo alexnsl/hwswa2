@@ -1,0 +1,14 @@
+description: >
+  Instance Manager database node. It is intended for use in the Cloud Infrastructure for hosting the Instance Manager database.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/69792.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/70118.htm
+includes: [ lincommon, lin.oa.managed.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.'
+  ram(GB): 8
+  swap(GB): 16
+  cpu-cores: 4
+  /var: 130
+  /: 4
+  networks: [backnet]

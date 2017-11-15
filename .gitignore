@@ -3,3 +3,6 @@
 *.pyc
 # vim temporary
 .*.swp
+*.pdf
+virtualenv/
+logs/

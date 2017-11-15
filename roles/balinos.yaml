@@ -1,11 +1,42 @@
-description: Checks for BALINOS role, linux BA online store
-includes: [ lincommon, lin.oa.managed.fw, baos.fw ]
+description: >
+  OA Billing Online Store server on Linux. The server runs OA Billing Online Store.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/60440.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/63154.htm
+includes: [ lincommon, lin.oa.managed.fw ]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 1
   swap(GB): 2
   cpu-frequency: 2.3
   /boot: 0.2
-  /: 90
+  /: 97
   networks: [backnet, frontnet]
   cert_baos: { type: manual, value: 'SSL certificate is needed for online store' }
+firewall:
+- name: Outgoing_to_BA
+  description: Allow access from Online Store to BA API
+  direction: outgoing
+  networks: [backnet]
+  ports: 5224
+  connect_with:
+    roles: [balinfe]
+- name: Incoming_to_BALINOS_backnet
+  description: Allow access to Online Store
+  networks: [backnet]
+  ports: 80,443
+  connect_with:
+    roles: [branding, linuibr, linuicln, balinfe]
+- name: External_incoming
+  description: Allow access to Online Store from public network
+  networks: [frontnet]
+  ports: 443
+  type: internet
+  connect_with:
+    hosts: any
+- name: download.automation.odin.com
+  networks: [frontnet]
+  ports: 443
+  type: internet
+  direction: outgoing
+  connect_with: { hosts: [ download.automation.odin.com ] }

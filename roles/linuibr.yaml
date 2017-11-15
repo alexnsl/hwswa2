@@ -1,5 +1,8 @@
-description: Checks for LINUIBR role, linux standalone branding server
-includes: [ lincommon, lin.oa.managed.fw, ngwebserver.fw ]
+description: >
+  Odin Automation UI Server with branding on Linux.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/89069.htm
+includes: [ lincommon, lin.oa.managed.fw, linui.fw, cp.fw ]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 16
@@ -9,4 +12,3 @@ requirements:
   /: 4
   /var: 40
   networks: [backnet, frontnet]
-  branding_ui_fw: { type: manual, value: 'Be sure to use auxiliay roles branding and ui in servers.yaml while checking firewall' }

@@ -1,0 +1,9 @@
+description: common firewall rules for linux
+internal: yes
+includes: [ common.fw ]
+firewall:
+- name: ssh
+  description: SSH
+  networks: [backnet, frontnet]
+  ports: 22
+  connect_with: {roles: [deployment_workstation]}

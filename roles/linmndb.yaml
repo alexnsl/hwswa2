@@ -1,19 +1,23 @@
-description: Checks for LINMNDB role, PostgreSQL database server for OA database, requirements are copied from balinbe
+description: >
+  Odin Automation management node on Linux.
+
+  The server runs a system database only.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/90000.htm
+  https://kb.odin.com/en/130548
 includes: [ lincommon ]
-firewall:
-  - name: Incoming_from_LinMN
-    description: Allow access to PostgreSQL from OA MN
-    networks: [backnet]
-    protos: [TCP, UDP]
-    ports: 5432
-    connect_with:
-      roles: [linmn]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   ram(GB): 8
   swap(GB): 16
   cpu-cores: 4
-  cpu-frequency: 2.3
-  /boot: 0.2
-  /: 150
+  cpu-frequency: 2.4
+  /: 5
+  /usr: 20
+  /var: 480
   networks: [backnet]
+firewall:
+- name: Incoming_from_LinMN
+  networks: [backnet]
+  connect_with: { roles: [linmnapp] }
+  ports: 22,5432

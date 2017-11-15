@@ -1,20 +1,19 @@
 description: >
   Odin Automation management node on Linux.
   
-  The server runs Odin Automation management software and system database.
+  The server runs Odin Automation management software only.
 
-  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/60434.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/89999.htm
 includes: [ lincommon, mn.fw ]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
-  ram(GB): 14
-  swap(GB): 16
+  ram(GB): 6
+  swap(GB): 12
   cpu-cores: 4
   cpu-frequency: 2.4
   /: 5
   /usr: 20
-  /var: 300
-  /var/log: 600
+  /var: 400
   networks: [backnet]
   disable_ipv6: { type: eq, parameter: 'network:disable_ipv6', value: "1" }
   cert_oa: { type: manual, value: 'SSL certificate is needed for control panel' }

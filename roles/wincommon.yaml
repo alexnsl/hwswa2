@@ -1,6 +1,7 @@
 description: Common checks for all windows roles
 internal: yes
 ostype: windows
+includes: [ wincommon.fw ]
 parameters:
   hostname: ps|hostname
   hw_id: ps|(gwmi Win32_ComputerSystemProduct).UUID

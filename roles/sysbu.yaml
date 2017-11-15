@@ -5,9 +5,9 @@ firewall:
   description: OA MN, BALINFE, IM, IMDB should be able to put backups over SSH
   networks: [backnet]
   ports: 22
-  connect_with: { roles: [linmn, balinbe, oaci_im, oaci_imdb] }
+  connect_with: { roles: [linmn, linmnapp, linmndb, balinbe, oaciim, oaciimdb] }
 requirements:
-  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.'
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* [67]\.'
   ram(GB): 0.5
   swap(GB): 1
   cpu-frequency: 2

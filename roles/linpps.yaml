@@ -1,11 +1,31 @@
-description: Checks for LINPPS role, linux privacy proxy server
-includes: [ lincommon, lin.oa.managed.fw, pps.fw ]
+description: >
+  Privacy Proxy Server on Linux
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/60496.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/63151.htm
+includes: [ lincommon, lin.oa.managed.fw ]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.'
   ram(GB): 0.5
   swap(GB): 1
-  cpu-cores: 1
   cpu-frequency: 2
   /: 40
   networks: [backnet, frontnet]
-
+firewall:
+- name: incoming
+  networks: [backnet]
+  ports: 8008
+  connect_with:
+    roles: [linmn, linmnapp, vzlin, vzlinbu, wsng, hewsl, ]
+- name: Outgoing_to_BA
+  direction: outgoing
+  networks: [frontnet]
+  ports: 443
+  connect_with: { roles: [balinfe] }
+- name: apscatalog
+  direction: outgoing
+  networks: [frontnet]
+  ports: 80
+  type: internet
+  connect_with:
+    hosts: [apscatalog.com]

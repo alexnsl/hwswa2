@@ -1,0 +1,20 @@
+description: >
+  Virtuozzo backup node. It is intended for use in the Cloud Infrastructure to store backups and images of Linux containers and Windows/Linux virtual machines.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/69794.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/70120.htm
+includes: [ lincommon, lin.oa.managed.fw, vz.fw ]
+requirements:
+  OS: 'Virtuozzo Linux release 7\.'
+  ram(GB): 2
+  swap(GB): 4
+  cpu-frequency: 1.5
+  /: 12
+  /vz: 1400
+  networks: [backnet]
+  storage_roles: { type: manual, value: 'Be sure to use vzstorage roles servers.yaml if VZ storage cluster is used' }
+firewall:
+- name: incoming
+  networks: [backnet]
+  ports: 64000,22
+  connect_with: {roles: [oacivz]}

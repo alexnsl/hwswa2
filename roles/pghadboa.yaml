@@ -1,0 +1,18 @@
+description: >
+  PGHADB – node, hosting Pgpool and PostgreSQL, representing master/slave node in PGHA cluster.
+
+  PGHADBOA - PGHADB node in Operations cluster.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/91394.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/91416.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/91417.htm
+includes: [ lincommon, linmndb ]
+firewall:
+- name: incoming_from_cluster_members
+  group: yes
+  networks: [backnet]
+  connect_with: { roles: [linmnapp,pghadboa] }
+  rules:
+  - ports: 22,15432,9000,9898
+  - ports: 9694
+    protos: [udp]

@@ -1,4 +1,7 @@
-description: Firewall rules for OA management node (common lin/win)
+description: >
+  Firewall rules common for LINMN and LINMNAPP.
+  
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/83938.htm
 internal: yes
 firewall:
 - name: gr_tcp_out_backnet
@@ -6,17 +9,17 @@ firewall:
   group: yes
   networks: [backnet]
   direction: outgoing
-  rules:  
+  rules:
+  - ports: 25,465
+    connect_with: {roles: [smtp]}
   - ports: 443
     connect_with: {roles: [aeh]}
   - ports: 389,3268
     connect_with: {roles: [ad]}
-  - ports: 5224,5643,5743,5843 
-    connect_with: {roles: [balinfe]}
   - ports: 3306
     connect_with: {roles: [mysql]}
   - ports: 5432
-    connect_with: {roles: [pgsql, linmndb]}
+    connect_with: {roles: [pgsql]}
   - ports: 8008
     connect_with: {roles: [linpps]}
   - ports: 389
@@ -24,9 +27,26 @@ firewall:
   - ports: 4433-4435
     connect_with: {roles: [vzlin, vzlinbu]}
   - ports: 4432
-    connect_with: {roles: [oaci_im]}
+    connect_with: {roles: [oaciim]}
   - ports: 48480
     connect_with: {roles: [wpesrvdb, wpesrv]}
+  - ports: 9444
+    connect_with: {roles: [lindrp]}
+- name: gr_tcp_in_backnet
+  description: Group for incoming connections in backnet
+  group: yes
+  networks: [backnet]
+  direction: incoming
+  rules:
+  - ports: 6308
+    connect_with: {roles: [aeh, branding]}
+  - ports: 8080
+    connect_with: {roles: [deployment_workstation]}
+  - ports: 22,9000,9898
+    connect_with: {roles: [pghadb]}
+  - ports: 9694
+    protos: [udp]
+    connect_with: {roles: [pghadb]}
 - name: pa_download
   description: allow access to pa repo
   direction: outgoing
@@ -34,4 +54,14 @@ firewall:
   type: internet
   ports: 80,443
   connect_with: {hosts: [download.automation.odin.com]}
+- name: smtp_relay
+  description: >
+    connection to external SMTP relay.
+
+    This rule will allways fail, it is here to be shown with show-firewall
+  networks: [backnet]
+  direction: outgoing
+  type: internet
+  ports: 25,465
+  connect_with: { hosts: [ smtp.relay ] }
 

@@ -1,16 +1,26 @@
-description: Checks for Office 365 Application End-point Host
+description: >
+  Office 365 Application Endpoint Host
+
+  http://download.automation.odin.com/poa/Office365_APS2/doc/93670.htm
+  http://download.automation.odin.com/poa/Office365_APS2/doc/93732.htm
+  http://download.automation.odin.com/poa/Office365_APS2/doc/93733.htm
+  http://download.automation.odin.com/poa/Office365_APS2/doc/93735.htm
 includes: [ wincommon ]
 firewall:
 - name: outgoing
   group: yes
   direction: outgoing
   rules:
-  - networks: [frontnet]
-    ports: 443
-    connect_with: {roles: [branding]}
+  - ports: 25,587
+    connect_with: {roles: [smtp]}
+  - ports: 80,21,1024-65535
+    connect_with: {roles: [webftp]}
   - networks: [backnet]
-    ports: 6308
-    connect_with: {roles: [linmn]}
+    ports: 443
+    connect_with: {roles: [branding,linui,linuicln,linuilb]}
+  - networks: [backnet]
+    ports: 6308,8440
+    connect_with: {roles: [linmn, linmnapp]}
   - networks: [backnet]
     ports: 5224
     connect_with: {roles: [balinfe]}
@@ -20,12 +30,24 @@ firewall:
 - name: incoming
   networks: [backnet]
   ports: 443
-  connect_with: {roles: [linmn]}
+  connect_with: {roles: [linmn, linmnapp]}
 - name: mosi_crest_graph
   direction: outgoing
   type: internet
   ports: 443
-  connect_with: {hosts: [mosi.microsoftonline.com, graph.windows.net, api.cp.microsoft.com]}
+  connect_with: 
+    hosts: 
+    - login.microsoftonline.com
+    - graph.windows.net
+    - login.windows.net
+    - partnerapi.store.microsoft.com
+    - api.cp.microsoft.com
+    - api.partnercenter.microsoft.com
+    - login.microsoftonline.de
+    - graph.cloudapi.de
+    - partner.partnercenterapi.microsoftonline.cn
+    - login.chinacloudapi.cn
+    - graph.chinacloudapi.cn
 - name: public
   networks: [frontnet]
   type: internet
@@ -42,3 +64,4 @@ requirements:
   networks: [backnet, frontnet]
   sql_distr: { type: manual, value: 'Distribution for MS SQL can be required' }
   csp_frontnet: { type: manual, value: 'Frontnet is not required for CSP' }
+  csp_frontnet: { type: manual, value: 'Firewall rules are specific for national clouds (outgoing connections to MS services).' }

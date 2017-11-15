@@ -1,0 +1,33 @@
+description: >
+  Odin Automation UI cluster nodes. Each node enables UI and Branding.
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/67379.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/92105.htm
+includes: [ lincommon, lin.oa.managed.fw, linui.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.'
+  ram(GB): 32
+  swap(GB): 64
+  cpu-cores: 4
+  cpu-frequency: 2.2
+  /: 16
+  networks: [backnet, frontnet]
+firewall:
+- name: gr_out_frontnet
+  description: Outgoing connections in frontnet
+  group: yes
+  networks: [frontnet]
+  direction: outgoing
+  rules:
+  - connect_with: { roles: [wm] }
+    ports: 443
+  - connect_with: { roles: [awstats] }
+    ports: 80
+  - connect_with: { roles: [filemanager] }
+    ports: 1299
+  - connect_with: { roles: [phpmyadm] }
+    ports: 9113
+  - connect_with: { roles: [phppgadm] }
+    ports: 9114
+  - connect_with: { roles: [balinfe] }
+    ports: 8443

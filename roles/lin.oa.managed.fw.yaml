@@ -7,6 +7,6 @@ firewall:
   networks: [backnet]
   ports: 22
   connect_with:
-    roles: [linmn]
+    roles: [linmn, linmnapp]
 requirements:
   selinux: Disabled

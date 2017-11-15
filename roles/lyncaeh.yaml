@@ -9,12 +9,12 @@ firewall:
 - name: from_mn
   networks: [backnet]
   ports: 443
-  connect_with: {roles: [linmn]}
+  connect_with: {roles: [linmn, linmnapp]}
 - name: to_mn_apsc
   networks: [backnet]
   direction: outgoing
   ports: 6308,8440
-  connect_with: {roles: [linmn]}
+  connect_with: {roles: [linmn, linmnapp]}
 requirements:
   OS_SP: "^Microsoft Windows Server (2008 R2 (Standard|Enterprise|Datacenter) Service Pack 1|2012.*(Standard|Datacenter))$"
   architecture: 64-bit

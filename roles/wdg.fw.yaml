@@ -22,5 +22,5 @@ firewall:
   rules:
   - { ports: 1433, connect_with: { roles: [mssql, mssqlcluster] } }
   - { ports: 3306, connect_with: { roles: [mysql] } }
-  - { ports: 5432, connect_with: { roles: [linmn, pgsql] } }
+  - { ports: 5432, connect_with: { roles: [linmn, linmndb, pgsql] } }
   - { ports: 22, connect_with: { roles: [lincommon] } }

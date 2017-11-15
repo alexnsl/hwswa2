@@ -1,4 +1,8 @@
-description: Checks for LINDNS role, linux DNS server
+description: >
+  DNS Server on Linux
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/60444.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/63158.htm
 includes: [ lincommon, lin.oa.managed.fw ]
 firewall:
   - name: Incoming_from_internet_to_LINDNS

@@ -1,0 +1,13 @@
+description: >
+  Firewall rules for control panel, common for LINUIBR and LINUILB
+  
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/86989.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/92105.htm
+internal: yes
+firewall:
+- name: in_public
+  description: Incoming public connections
+  networks: [frontnet]
+  type: internet
+  connect_with: { hosts: [any] }
+  ports: 80,443

@@ -6,15 +6,13 @@ firewall:
   group: yes
   networks: [backnet]
   ports: 8352-8439,8441-8500
-  connect_with: { roles: [linmn] }
+  connect_with: { roles: [linmn, linmnapp] }
   rules:
   - direction: outgoing
   - direction: incoming
 - name: Outgoing_to_LinMN
   description: Specific connections to lin MN
-  group: yes
   direction: outgoing
   networks: [backnet]
-  rules:
-  - ports: 80,16384
-    connect_with: { roles: [linmn] }
+  ports: 80,16384
+  connect_with: { roles: [linmn, linmnapp] }

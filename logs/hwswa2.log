@@ -1,8 +1,0 @@
-2016-07-05 11:39:49,874 ERROR [28759:MainProcess:hwswa2.server.role._init_data():129] Error opening role file /home/alex/projects/hwswa2/src/roles/pvclin.yaml, assuming it is empty role. Exception: [Errno 2] No such file or directory: '/home/alex/projects/hwswa2/src/roles/pvclin.yaml'
-2016-07-05 11:43:30,022 INFO [29992:MainProcess:hwswa2.subcommands.log_info_and_print():27] Checking servers: None
-2016-07-05 11:43:53,162 INFO [30006:MainProcess:hwswa2.subcommands.log_info_and_print():27] Checking servers: None
-2016-07-05 12:56:58,005 INFO [31703:MainProcess:hwswa2.subcommands.log_info_and_print():27] Checking servers: None
-2016-07-05 12:57:13,577 INFO [31719:MainProcess:hwswa2.subcommands.log_info_and_print():27] Checking servers: None
-2016-07-05 15:22:35,210 INFO [2311:MainProcess:hwswa2.subcommands.log_info_and_print():27] Checking servers: None
-2016-07-05 15:26:30,677 INFO [2457:MainProcess:hwswa2.subcommands.log_info_and_print():27] Checking servers: None
-2016-07-05 15:39:10,600 ERROR [2891:MainProcess:hwswa2.server.role._init_data():129] Error opening role file /home/alex/projects/hwswa2/src/roles/wpe.oa.managed.fw.yaml, assuming it is empty role. Exception: [Errno 2] No such file or directory: '/home/alex/projects/hwswa2/src/roles/wpe.oa.managed.fw.yaml'

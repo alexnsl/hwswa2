@@ -1,15 +1,15 @@
-description: Firewall rules for PCS server
+description: Firewall rules for VZ server
 internal: yes
 firewall:
 - name: Outgoing_to_Internet
   direction: outgoing
-  networks: [frontnet]
+  networks: [backnet, frontnet]
   type: internet
   group: yes
   rules:
   - ports: 5224,7050
-    connect_with: {hosts: [ka.odin.com]}
+    connect_with: {hosts: [ka.virtuozzo.com]}
   - ports: 80,443
-    connect_with: {hosts: [vzup2date.swsoft.com, vzup2date.parallels.com]}
-requirements:
-  CPUVTfeatures: { type: neq, value: '' }
+    connect_with: {hosts: [repo.virtuozzo.com, vzdownload.swsoft.com, vzup2date.parallels.com]}
+  - ports: 8443
+    connect_with: {hosts: [subscription.virtuozzo.com]}

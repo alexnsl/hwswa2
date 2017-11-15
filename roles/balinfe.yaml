@@ -2,23 +2,74 @@ description: >
   Business Automation Application Server on Linux.
   
   Server runs Business Automation components and Business Automation UI.
-includes: [ lincommon, lin.oa.managed.fw, bafe.fw ]
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/hardware_requirements/61814.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/firewall_configuration/63152.htm
+  http://download.automation.odin.com/poa/Office365_APS2/doc/93734.htm
+includes: [ lincommon, lin.oa.managed.fw ]
 parameters:
   no_pba_account: getent passwd pba >/dev/null 2>&1 && echo NOK, pba account exist || echo OK, pba account does not exist
-firewall:
-- name: incoming_from_wdg
-  description: Allow access to from watchdog
-  networks: [frontnet]
-  ports: 22,443,8443
-  connect_with:
-    roles: [linwdg]
 requirements:
   OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
   no_pba_account: { type: regex, value: '^OK' }
   ram(GB): 4
   swap(GB): 8
   cpu-cores: 2
-  cpu-frequency: 2.3
+  cpu-frequency: 2.4
   /boot: 0.2
-  /: 180
+  /: 230
+  /var/log: 500
   networks: [backnet, frontnet]
+firewall:
+- name: incoming_backnet
+  group: yes
+  description: incoming connections in backnet
+  networks: [backnet]
+  rules:
+  - ports: 5224,6308,5432,5643,5743,5843
+    connect_with: { roles: [linmn, linmnapp] }
+  - ports: 5224
+    connect_with: { roles: [balinos,branding,linuibr] }
+- name: outgoing_backnet
+  description: outgoing connections in backnet
+  group: yes
+  direction: outgoing
+  networks: [backnet]
+  rules:
+  - ports: 22,6308,8440
+    connect_with: { roles: [linmn, linmnapp] }
+- name: outgoing_frontnet
+  description: outgoing connections in frontnet
+  group: yes
+  direction: outgoing
+  networks: [frontnet]
+  rules:
+  - ports: 21,443,60000-65534
+    connect_with: { roles: [branding] }
+- name: incoming_frontnet
+  description: incoming connections in frontnet
+  networks: [frontnet]
+  ports: 8443
+  connect_with:
+    roles: [branding, linpps]
+- name: incoming_from_internet
+  description: Allow access to the panel
+  networks: [frontnet]
+  ports: 8443
+  type: internet
+  connect_with:
+    hosts: [any]
+- name: incoming_from_wdg
+  description: Allow access to from watchdog
+  networks: [frontnet]
+  ports: 22,8443
+  connect_with:
+    roles: [linwdg]
+- name: outgoing_internet
+  description: external services
+  direction: outgoing
+  networks: [frontnet]
+  type: internet
+  ports: 443
+  connect_with: { hosts: [download.automation.odin.com, rev-reports.odin.com, report.odin.com] }
+

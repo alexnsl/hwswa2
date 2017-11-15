@@ -7,7 +7,7 @@ firewall:
   rules:
   - name: to_apsc
     ports: 6308
-    connect_with: { roles: [linmn] }
+    connect_with: { roles: [linmn, linmnapp] }
   - name: to_privoxy
     ports: 8008
     connect_with: { roles: [linpps] }

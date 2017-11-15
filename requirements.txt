@@ -1,11 +1,10 @@
-PyInstaller
 PyYAML
 argparse
 configobj
 paramiko
+pycrypto
 winrmlib
 ipcalc
-validate
 zxcvbn
 pyasn1
 XlsxWriter

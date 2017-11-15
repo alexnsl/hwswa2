@@ -1,0 +1,52 @@
+version: 2
+general:
+  branches:
+    only:
+    - circleci
+
+jobs:
+  build:
+    docker:
+    - image: gorilych/circleci-centos7-python
+    working_directory: ~/repo
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v3-dependencies-{{ checksum "requirements.txt" }}
+        # fallback to using the latest cache if no exact match is found
+        - v3-dependencies-
+    - run:
+        name: create virtualenv
+        command: |
+          virtualenv --system-site-packages --always-copy --prompt='(hwswa2)' virtualenv
+          rm -f virtualenv/{,local/}bin/python{2,2.7} virtualenv/{local/}lib/python2.7/lib-dynload/*
+          ln -s python virtualenv/bin/python2
+          ln -s python virtualenv/bin/python2.7
+          virtualenv --relocatable virtualenv
+          source virtualenv/bin/activate
+          pip install -r requirements.txt
+          virtualenv --relocatable virtualenv
+          find virtualenv \( -name '*.pyc' -o -name '*.pyo' \) -delete
+    - save_cache:
+        paths:
+        - ./virtualenv
+        key: v3-dependencies-{{ checksum "requirements.txt" }}
+    - run:
+        name: create PDFs
+        command: |
+          if which rst2pdf >/dev/null; then
+            RSTs=$(find . -path ./virtualenv -prune -o -name '*.rst' -print)
+            for d in $RSTs; do 
+              rst2pdf $d
+            done
+          fi
+    - run:
+        name: create distribution archive
+        command: |
+          PDFs=$(find . -path ./virtualenv -prune -o -name '*.pdf' -print)
+          git archive --prefix hwswa2/ --format tar --output hwswa2.tar HEAD
+          tar --append -f hwswa2.tar --transform 's,^\.,hwswa2,' ./virtualenv/ $PDFs
+    - store_artifacts:
+        path: hwswa2.tar
+        destination: hwswa2.tgz
