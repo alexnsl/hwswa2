@@ -1,0 +1,16 @@
+description: >
+  WebHosting Plesk Module FTP server for backups
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/87837.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/88823.htm
+includes: [ lincommon, lin.oa.managed.fw ]
+requirements:
+  OS: '(CloudLinux|CentOS|Red Hat Enterprise Linux Server).* 7\.'
+  ram(GB): 2
+  cpu-cores: 1
+  networks: [backnet]
+firewall:
+- name: incoming
+  networks: [backnet]
+  connect_with: { roles: [plesklin, pleskwin] }
+  ports: 20,21

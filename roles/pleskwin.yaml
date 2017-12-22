@@ -1,0 +1,25 @@
+description: >
+  WebHosting Plesk Module IIS web server
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/87837.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/88823.htm
+  https://docs.plesk.com/release-notes/onyx/hardware-requirements/
+includes: [ wincommon, win.oa.managed.fw, plesk.fw ]
+requirements:
+  OS_SP: "^Microsoft Windows Server 2012 R2"
+  architecture: 64-bit
+  ram(GB): 2
+  cpu-cores: 4
+  'C:': 80
+  networks: [backnet, frontnet]
+  plesklic: { type: manual, value: "License should have WEB PRO or WEB HOST edition" }
+firewall:
+- name: public_incoming
+  group: yes
+  type: internet
+  networks: [frontnet]
+  connect_with: {hosts: any}
+  rules:
+  - { proto: [udp], ports: 137,138 }
+  - ports: 139,445,106,1433,53
+

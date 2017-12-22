@@ -6,6 +6,8 @@ Version History
     - Change: updated roles according requirements of OAP 7.2
     - Change: removed pyinstaller-based distribution
     - Added: support for CircleCI
+    - Added: PGHA roles
+    - Added: WebHosting Plesk roles
 
 0.7.0 (2016-03-01)
     - Added: new options for report: --xlsx

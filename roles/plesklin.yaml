@@ -1,0 +1,14 @@
+description: >
+  WebHosting Plesk Module Apache web server
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/87837.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/88823.htm
+  https://docs.plesk.com/release-notes/onyx/hardware-requirements/
+includes: [ lincommon, lin.oa.managed.fw, plesk.fw ]
+requirements:
+  OS: '(CloudLinux|CentOS|Red Hat Enterprise Linux Server).* 7\.'
+  ram(GB): 2
+  cpu-cores: 4
+  /: 20
+  networks: [backnet, frontnet]
+  plesklic: { type: manual, value: "License should have WEB PRO or WEB HOST edition" }

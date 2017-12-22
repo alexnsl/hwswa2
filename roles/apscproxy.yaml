@@ -1,0 +1,15 @@
+description: >
+  Firewall rules for APSC proxy server
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/cloud_infrastructure_provider_guide/84270.htm
+firewall:
+- name: to_apsc
+  networks: [backnet]
+  direction: outgoing
+  ports: 6308
+  connect_with: {roles: [linmn, linmnapp]}
+- name: apscproxy
+  networks: [frontnet]
+  type: internet
+  ports: 6308
+  connect_with: {hosts: [vps.ip.pool]}

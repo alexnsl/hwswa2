@@ -1,0 +1,19 @@
+description: >
+  Firewall rules for Plesk servers
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/88823.htm
+  https://docs.plesk.com/en-US/onyx/administrator-guide/plesk-administration/ports-used-by-plesk.64950/
+  https://support.plesk.com/hc/en-us/articles/213383529-License-fails-to-update
+internal: yes
+firewall:
+- name: Outgoing_to_KA
+  direction: outgoing
+  networks: [backnet, frontnet]
+  type: internet
+  connect_with: {hosts: [ka.plesk.com]}
+  ports: 5224
+- name: public_incoming
+  type: internet
+  networks: [frontnet]
+  connect_with: {hosts: any}
+  ports: 8880,8443,8447,21,22,80,443,25,465,110,995,143,993,3306,5432,5224

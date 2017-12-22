@@ -18,6 +18,7 @@ requirements:
   /vz: 88
   networks: [backnet, frontnet]
   storage_roles: { type: manual, value: 'Be sure to use vzstorage roles if VZ storage cluster is used' }
+  apscproxy_role: { type: manual, value: 'Be sure to use apscproxy role and check FW requirements in case if Plesk in VPS is planned' }
 firewall:
 - name: incoming
   group: yes
@@ -30,3 +31,8 @@ firewall:
     ports: 80
   - connect_with: {roles: [oacivz]}
     ports: 64000
+- name: to_apsc
+  direction: outgoing
+  networks: [backnet]
+  connect_with: {roles: [linmn, linmnapp]}
+  ports: 6308

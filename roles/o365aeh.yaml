@@ -10,23 +10,20 @@ firewall:
 - name: outgoing
   group: yes
   direction: outgoing
+  networks: [backnet]
   rules:
-  - ports: 25,587
-    connect_with: {roles: [smtp]}
-  - ports: 80,21,1024-65535
-    connect_with: {roles: [webftp]}
-  - networks: [backnet]
+  - connect_with: {roles: [smtp]}
+    ports: 25,587
+  - connect_with: {roles: [webftp]}
+    ports: 80,21,1024-65535
+  - connect_with: {roles: [branding,linui,linuicln,linuilb]}
     ports: 443
-    connect_with: {roles: [branding,linui,linuicln,linuilb]}
-  - networks: [backnet]
+  - connect_with: {roles: [linmn, linmnapp]}
     ports: 6308,8440
-    connect_with: {roles: [linmn, linmnapp]}
-  - networks: [backnet]
+  - connect_with: {roles: [balinfe]}
     ports: 5224
-    connect_with: {roles: [balinfe]}
-  - networks: [backnet]
+  - connect_with: {roles: [o365mssql]}
     ports: 1433
-    connect_with: {roles: [o365mssql]}
 - name: incoming
   networks: [backnet]
   ports: 443

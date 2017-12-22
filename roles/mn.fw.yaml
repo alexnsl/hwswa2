@@ -42,11 +42,6 @@ firewall:
     connect_with: {roles: [aeh, branding]}
   - ports: 8080
     connect_with: {roles: [deployment_workstation]}
-  - ports: 22,9000,9898
-    connect_with: {roles: [pghadb]}
-  - ports: 9694
-    protos: [udp]
-    connect_with: {roles: [pghadb]}
 - name: pa_download
   description: allow access to pa repo
   direction: outgoing

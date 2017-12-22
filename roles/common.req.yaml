@@ -1,0 +1,4 @@
+description: Common requirements for all roles
+internal: yes
+requirements:
+  timesync: { type: manual, value: 'Make sure time and timezone is synced across all servers' }

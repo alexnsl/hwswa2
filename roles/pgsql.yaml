@@ -1,7 +1,7 @@
 description: Checks for PGSQL role, linux postgresql server
 includes: [ lincommon, lin.oa.managed.fw ]
 requirements:
-  OS: '(CentOS|Red Hat Enterprise Linux Server).* 6\.'
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* [6|7]\.'
   ram(GB): 4
   swap(GB): 8
   cpu-cores: 2

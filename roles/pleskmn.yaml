@@ -1,0 +1,22 @@
+description: >
+  WebHosting Plesk Module Websites Manager
+
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/87837.htm
+  https://download.automation.odin.com/oa/7.2/oapremium/portal/en/webhosting_plesk_guide/88823.htm
+includes: [ lincommon, lin.oa.managed.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.'
+  ram(GB): 8
+  cpu-cores: 4
+  /: 50
+  networks: [backnet]
+firewall:
+- name: outgoing
+  group: yes
+  direction: outgoing
+  networks: [backnet]
+  rules:
+  - connect_with: { roles: [plesklin, pleskwin] }
+    ports: 6300
+  - connect_with: { roles: [linmn, linmnapp] }
+    ports: 6308
