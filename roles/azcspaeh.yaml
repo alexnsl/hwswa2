@@ -1,0 +1,11 @@
+description: Azure application endpoint host
+includes: [ lincommon, mn.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
+  ram(GB): 4
+  swap(GB): 8
+  cpu-cores: 4
+  cpu-frequency: 2.3
+  /: 80  
+  networks: [backnet]
+  disable_ipv6: { type: eq, parameter: 'network:disable_ipv6', value: "1" }  
