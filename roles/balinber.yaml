@@ -1,0 +1,11 @@
+description: BA Database replication server.
+includes: [ lincommon, mn.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
+  ram(GB): 8
+  swap(GB): 16
+  cpu-cores: 2
+  cpu-frequency: 2.3
+  /: 480
+  networks: [backnet]
+  disable_ipv6: { type: eq, parameter: 'network:disable_ipv6', value: "1" }
