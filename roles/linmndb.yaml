@@ -15,5 +15,5 @@ requirements:
   cpu-cores: 4
   cpu-frequency: 2.3
   /boot: 0.2
-  /: 150
+  /: 400
   networks: [backnet]
