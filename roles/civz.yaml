@@ -16,6 +16,6 @@ requirements:
   swap(GB): 4
   cpu-frequency: 1.5
   /: 12
-  /vz: 88
+  /vz: 1440
   networks: [backnet, frontnet]
   storage_roles: { type: manual, value: 'Be sure to use vzstorage roles servers.yaml if VZ storage cluster is used' }
