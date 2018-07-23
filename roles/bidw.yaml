@@ -1,0 +1,11 @@
+description: Data warehouse server for Odin Automation business intelligence solution.
+includes: [ lincommon, mn.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
+  ram(GB): 16 
+  swap(GB): 16
+  cpu-cores: 4
+  cpu-frequency: 2.3
+  /: 4000
+  networks: [backnet]
+  disable_ipv6: { type: eq, parameter: 'network:disable_ipv6', value: "1" }
