@@ -8,7 +8,7 @@ requirements:
   cpu-frequency: 2.3
   /: 5
   /usr: 20
-  /var: 150
+  /var: 400
   networks: [backnet]
   disable_ipv6: { type: eq, parameter: 'network:disable_ipv6', value: "1" }
   cert_oa: { type: manual, value: 'SSL certificate is needed for control panel' }
