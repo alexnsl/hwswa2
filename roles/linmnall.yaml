@@ -1,0 +1,14 @@
+description: Checks for LINAPP role, linux management node
+includes: [ lincommon, mn.fw ]
+requirements:
+  OS: '(CentOS|Red Hat Enterprise Linux Server).* 7\.[234]'
+  ram(GB): 6
+  swap(GB): 12
+  cpu-cores: 4
+  cpu-frequency: 2.3
+  /: 5
+  /usr: 20
+  /var: 400
+  networks: [backnet]
+  disable_ipv6: { type: eq, parameter: 'network:disable_ipv6', value: "1" }
+  cert_oa: { type: manual, value: 'SSL certificate is needed for control panel' }
